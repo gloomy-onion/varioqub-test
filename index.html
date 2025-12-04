@@ -26,13 +26,17 @@
         (window, document, 'script', 'https://abt.s3.yandex.net/expjs/latest/exp.js', 'ymab');
         ymab('metrika.105672115', 'init'/*, {clientFeatures}, {callback}*/);
     </script>
-
+    <script>
+        document.getElementById("test-button").addEventListener("click", () => {
+            ym(105672115,'reachGoal','click_button')
+                });
+    </script>
 
 </head>
 <body>
 
-<button id="test-button" style="color: blue">Купить</button>
-<button id="test-button" style="color: red">Заказать</button>
+<button id="test-button-buy" style="color: blue">Купить</button>
+<button id="test-button-order" style="color: red">Заказать</button>
 
 </body>
 </html>
