@@ -38,6 +38,33 @@
     ym(105672115,'reachGoal','click_button')
   });
 </script>
+<script>
+  ymab('metrika.105672115', 'getFlags', function (flags) {
+    console.log('Varioqub flags:', flags);
+
+    if (flags.heading_text) {
+      const h1 = document.createElement('h1');
+      h1.innerText = flags.heading_text;
+      document.body.prepend(h1);
+    }
+
+    if (flags.button_color) {
+      const btn = document.getElementById('test-button-buy');
+      btn.style.backgroundColor = flags.button_color;
+      btn.style.color = 'white';
+    }
+
+    if (flags.show_discount === true) {
+      const discount = document.createElement('div');
+      discount.innerText = '🔥 Скидка 20%';
+      discount.style.marginTop = '12px';
+      discount.style.fontSize = '18px';
+      discount.style.color = 'red';
+      document.body.appendChild(discount);
+    }
+  });
+</script>
+
 
 </body>
 </html>
