@@ -3,68 +3,40 @@
 <head>
     <meta charset="UTF-8" />
     <title>Varioqub + Метрика тест</title>
-
     <!-- Yandex.Metrika counter -->
     <script type="text/javascript">
-        (function(m,e,t,r,i,k,a){
-            m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-            m[i].l=1*new Date();
-            for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-            k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
-        })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=105672115', 'ym');
+      (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+      })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=105672115', 'ym');
 
-        ym(105672115, 'init', {
-            ssr:true,
-            webvisor:true,
-            clickmap:true,
-            ecommerce:"dataLayer",
-            accurateTrackBounce:true,
-            trackLinks:true
-        });
+      ym(105672115, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", accurateTrackBounce:true, trackLinks:true});
     </script>
     <noscript><div><img src="https://mc.yandex.ru/watch/105672115" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
     <!-- /Yandex.Metrika counter -->
+    <script src="https://yastatic.net/s3/ents-ab/ymab.min.js"></script>
 
-    <!-- Varioqub -->
-    <script src="https://abt.s3.yandex.net/expjs/latest/exp.js"></script>
+    <!-- Varioqub experiments -->
+    <script type="text/javascript">
+      (function(e, x, pe, r, i, me, nt){
+        e[i]=e[i]||function(){(e[i].a=e[i].a||[]).push(arguments)},
+          me=x.createElement(pe),me.async=1,me.src=r,nt=x.getElementsByTagName(pe)[0],me.addEventListener('error',function(){function cb(t){t=t[t.length-1],'function'==typeof t&&t({flags:{}})};Array.isArray(e[i].a)&&e[i].a.forEach(cb);e[i]=function(){cb(arguments)}}),nt.parentNode.insertBefore(me,nt)})
+      (window, document, 'script', 'https://abt.s3.yandex.net/expjs/latest/exp.js', 'ymab');
+      ymab('metrika.105672115', 'init'/*, {clientFeatures}, {callback}*/);
+    </script>
     <script>
-      ymab('metrika.105672115', 'init');
-
-      const experiment = ymab.experiment('promo_test', {
-        flags: {
-          heading_text: ["Лучшее предложение", "Только сегодня"],
-          button_color: ["blue", "red", "green"],
-          show_discount: [true, false]
-        }
-      });
-
-      const userVariant = experiment.variant();
-      console.log('Текущий вариант пользователя:', userVariant);
-
-      document.addEventListener("DOMContentLoaded", () => {
-
-        const heading = document.getElementById("promo-heading");
-        heading.textContent = userVariant.heading_text;
-
-        const button = document.getElementById("test-button-buy");
-        button.style.color = userVariant.button_color;
-
-        const discount = document.getElementById("discount");
-        discount.style.display = userVariant.show_discount ? "block" : "none";
-
-        button.addEventListener("click", () => {
-          ym(105672115,'reachGoal','click_button');
-          console.log('Нажата кнопка, вариант пользователя:', userVariant);
-        });
+      document.getElementById("test-button-buy").addEventListener("click", () => {
+        ym(105672115,'reachGoal','click_button')
       });
     </script>
+
 </head>
 
 <body>
-<h2 id="promo-heading" style="font-size: 28px; margin-bottom: 10px;"></h2>
-<div id="discount" style="display: none; color: green; font-weight: bold; margin-bottom: 10px;">
-    Скидка 20%!
-</div>
+
 <button id="test-button-buy" style="font-size: 24px;">Купить</button>
+
 </body>
 </html>
