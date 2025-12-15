@@ -28,21 +28,43 @@
     <!-- Varioqub -->
     <script src="https://abt.s3.yandex.net/expjs/latest/exp.js"></script>
     <script>
-        ymab('metrika.105672115', 'init');
+      ymab('metrika.105672115', 'init');
+
+      const experiment = ymab.experiment('promo_test', {
+        flags: {
+          heading_text: ["Лучшее предложение", "Только сегодня"],
+          button_color: ["blue", "red", "green"],
+          show_discount: [true, false]
+        }
+      });
+
+      const userVariant = experiment.variant();
+      console.log('Текущий вариант пользователя:', userVariant);
+
+      document.addEventListener("DOMContentLoaded", () => {
+
+        const heading = document.getElementById("promo-heading");
+        heading.textContent = userVariant.heading_text;
+
+        const button = document.getElementById("test-button-buy");
+        button.style.color = userVariant.button_color;
+
+        const discount = document.getElementById("discount");
+        discount.style.display = userVariant.show_discount ? "block" : "none";
+
+        button.addEventListener("click", () => {
+          ym(105672115,'reachGoal','click_button');
+          console.log('Нажата кнопка, вариант пользователя:', userVariant);
+        });
+      });
     </script>
 </head>
 
 <body>
-
-<button id="test-button-buy" style="color: blue; font-size: 24px;">
-    Купить
-</button>
-
-<script>
-    document.getElementById("test-button-buy").addEventListener("click", () => {
-        ym(105672115,'reachGoal','click_button');
-    });
-</script>
-
+<h2 id="promo-heading" style="font-size: 28px; margin-bottom: 10px;"></h2>
+<div id="discount" style="display: none; color: green; font-weight: bold; margin-bottom: 10px;">
+    Скидка 20%!
+</div>
+<button id="test-button-buy" style="font-size: 24px;">Купить</button>
 </body>
 </html>
