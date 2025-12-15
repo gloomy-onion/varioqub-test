@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <title>Varioqub + Метрика тест</title>
+
     <!-- Yandex.Metrika counter -->
     <script type="text/javascript">
       (function(m,e,t,r,i,k,a){
@@ -16,7 +17,6 @@
     </script>
     <noscript><div><img src="https://mc.yandex.ru/watch/105672115" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
     <!-- /Yandex.Metrika counter -->
-    <script src="https://yastatic.net/s3/ents-ab/ymab.min.js"></script>
 
     <!-- Varioqub experiments -->
     <script type="text/javascript">
@@ -26,17 +26,18 @@
       (window, document, 'script', 'https://abt.s3.yandex.net/expjs/latest/exp.js', 'ymab');
       ymab('metrika.105672115', 'init'/*, {clientFeatures}, {callback}*/);
     </script>
-    <script>
-      document.getElementById("test-button-buy").addEventListener("click", () => {
-        ym(105672115,'reachGoal','click_button')
-      });
-    </script>
 
 </head>
 
 <body>
 
 <button id="test-button-buy" style="font-size: 24px;">Купить</button>
+
+<script>
+  document.getElementById("test-button-buy").addEventListener("click", () => {
+    ym(105672115,'reachGoal','click_button')
+  });
+</script>
 
 </body>
 </html>
