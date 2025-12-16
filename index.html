@@ -64,6 +64,52 @@
     }
   });
 </script>
+<script>
+    async function initExperiment() {
+        try {
+            const response = await fetch(`/experiment?url=${encodeURIComponent(window.location.href)}`);
+            const data = await response.json();
+
+            console.log('UserSplit flags:', data.flags);
+            console.log('UserSplit experiments:', data.experiments);
+
+            if (data.experiments) {
+                ym(105672115, 'experiments', data.experiments);
+            }
+
+            const flags = {};
+            data.flags.forEach(f => {
+                flags[f.n] = f.v;
+            });
+
+            if (flags.heading_text) {
+                const h1 = document.createElement('h1');
+                h1.innerText = flags.heading_text;
+                document.body.prepend(h1);
+            }
+
+            if (flags.button_color) {
+                const btn = document.getElementById('test-button-buy');
+                btn.style.backgroundColor = flags.button_color;
+                btn.style.color = 'white';
+            }
+
+            if (flags.show_discount === true) {
+                const discount = document.createElement('div');
+                discount.innerText = '🔥 Скидка 20%';
+                discount.style.marginTop = '12px';
+                discount.style.fontSize = '18px';
+                discount.style.color = 'red';
+                document.body.appendChild(discount);
+            }
+
+        } catch (err) {
+            console.error('Experiment init error', err);
+        }
+    }
+
+    initExperiment();
+</script>
 
 
 </body>
